@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto:wght@500&display=swap');
+
+.productCard-title {
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* font-size: .9rem; */
+    font-size: 16px;
+    font-weight: 400;
+    padding-top: .4rem;
+    height: 10%;
+}
+.productCard-price {
+    box-sizing: border-box;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 24px;
+    font-size: 16px;
+    padding: 1px;
+    width: 100%;
+    margin: 0;
+    padding-top: .2rem;
+    height: 10%;
+}
+.productCard-description {
+    height: 10%;
+
+    box-sizing: border-box;
+    padding-top: .2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: normal;
+    color: rgb(135, 135, 135);
+    font-size: 12px;
+    margin: 0;
+}
+.product-card  {
+    box-sizing: border-box;
+    position: relative;
+    background-color: white;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    font-family: Roboto,Arial,sans-serif;
+    letter-spacing: 0;
+    margin: 10px;
+}
+
+.product-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

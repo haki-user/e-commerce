@@ -1,0 +1,26 @@
+/* style={{
+    color: "black",
+    position: "absolute",
+    bottom: "0",
+    boxSizing: "border-box",
+    backgroundImage: "linear-gradient(to top, rgba(255,255,255,0.8), rgba(255,255,255,0))",
+    width: "100%",
+}} */
+
+.card-text {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  color: black;
+  box-sizing: border-box;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.text {
+  color: red;
+}
+
