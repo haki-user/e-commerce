@@ -51,6 +51,6 @@ app.use('/auth', auth_1.default);
 app.use('/cart', cart_routes_1.default);
 app.use('/orders', order_routes_1.default);
 app.use('/products', product_routes_1.default);
-app.listen(PORT, "http://16.171.93.79", () => {
+app.listen(PORT, "16.171.93.79", () => {
     console.log(`Listening on port  ${PORT}`);
 });
