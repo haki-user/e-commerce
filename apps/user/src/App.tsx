@@ -13,7 +13,7 @@ import { Navbar } from "./components/Navbar";
 // import ulquiorra from './assets/init_d.jpg';
 import axios from "axios";
 
-axios.defaults.baseURL = "http://13.53.175.29/5175/";
+axios.defaults.baseURL = "http://13.53.175.29:5000/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
 
