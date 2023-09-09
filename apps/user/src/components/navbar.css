@@ -1,0 +1,18 @@
+.shortcut-item-dropdown {
+  display: none;
+}
+.shortcut-item:hover .shortcut-item-dropdown {
+  display: block !important;
+  z-index: 1000 !important;
+}
+
+.shortcut-item-dropdown .link {
+  text-decoration: none;
+  color: #898989;
+  font-weight: 500;
+}
+
+.shortcut-item-dropdown a:hover {
+  color: rgb(25, 25, 25);
+  text-decoration: underline;
+}

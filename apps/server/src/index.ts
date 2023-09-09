@@ -30,6 +30,6 @@ app.use('/cart', cartRouter);
 app.use('/orders', orderRouter);
 app.use('/products', productRouter);
 
-app.listen(PORT, () => {
+app.listen(PORT, "http://13.53.175.29:7000",  () => {
     console.log(`Listening on port  ${PORT}`);
 });

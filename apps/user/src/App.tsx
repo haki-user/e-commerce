@@ -9,11 +9,11 @@ import { Store } from "./components/Store";
 import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
 import { ProductPage } from "./components/ProductPage";
-import { Navbar } from "ui";
+import { Navbar } from "./components/Navbar";
 // import ulquiorra from './assets/init_d.jpg';
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "http://13.53.175.29/5175/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
 
@@ -31,9 +31,9 @@ function App() {
         console.log(res.data?.message);
         return;
       }
-      console.log(res.data);
+      console.log("res",res.data);
       setAuth((prev) => {
-        return { ...prev, username: res.data };
+        return { ...prev, username: res.data.username };
       });
     } catch (e) {
       if(e?.response.status == 401) {
