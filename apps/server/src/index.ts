@@ -24,12 +24,12 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use('/items', itemsRouter); 
-app.use('/auth', authRouter);
-app.use('/cart', cartRouter);
-app.use('/orders', orderRouter);
-app.use('/products', productRouter);
+app.use('/api/items', itemsRouter); 
+app.use('/api/auth', authRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/orders', orderRouter);
+app.use('/api/products', productRouter);
 
-app.listen(PORT, "http://16.171.93.79",  () => {
+app.listen(PORT,  () => {
     console.log(`Listening on port  ${PORT}`);
 });
