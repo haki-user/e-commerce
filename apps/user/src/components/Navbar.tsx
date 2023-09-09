@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { authState } from "recoil-state";
 import { useRecoilState } from "recoil";
 import "./navbar.css";
-import NavAppLogo from "../assets/navAppLogo.svg";
-import NavUserIcon from "../assets/NavUserIcon.svg";
-import NavSearchIcon from "../assets/NavSearchIcon.svg";
-import NavCartIcon from "../assets/NavCartIcon.svg";
+// import { ReactComponent as NavAppLogo } from "../assets/navAppLogo.svg";
+// import { ReactComponent as NavUserIcon } from "../assets/NavUserIcon.svg";
+// import { ReactComponent as NavSearchIcon } from "../assets/NavSearchIcon.svg";
+// import { ReactComponent as NavCartIcon } from "../assets/NavCartIcon.svg";
 
 export const Navbar: React.FC = () => {
   const [user, setUser] = useRecoilState(authState);
@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
     >
       <div className="navAppLogo" style={{ maxWidth: 32, maxHeight: 32 }}>
         <Link to="/">
-          <NavAppLogo />
+          <img src="https://gist.githubusercontent.com/haki-user/676598b6d67772d954126ce1217c3fca/raw/69dc6389ca30db819cbf457c40b58c9e7c77b2d6/gojo.svg" alt="gojo" />
         </Link>
       </div>
       <div className="nav_separator" style={{ width: "" }}></div>
@@ -75,13 +75,13 @@ export const Navbar: React.FC = () => {
             className="nav_search_icon"
             style={{ width: 24, paddingLeft: 8, paddingRight: 8 }}
           >
-            <NavSearchIcon />
+            <img src="https://gist.githubusercontent.com/haki-user/42fe4f45c23717405c379bd4ac38120d/raw/01bcffd864ba95b34a11c08fbae51db4db2964bc/search.svg" alt="search" />
           </div>
         </li>
 
         <li className="nav-cart" style={{ paddingLeft: 8, paddingRight: 8 }}>
           <Link to="/cart">
-            <NavCartIcon />
+            <img src="https://gist.githubusercontent.com/haki-user/2627d0ca08b248a79987cea7239bd79a/raw/45ac7a915fa9277ff0e65a1400460d0bb0cd4d62/cart.svg" alt="cart" />
           </Link>
         </li>
         <li
@@ -112,7 +112,7 @@ export const Navbar: React.FC = () => {
                 to={user.username ? "dashboard" : ""}
                 style={{ marginTop: 10, display: "inline" }}
               >
-                <NavUserIcon />
+                <img src="https://gist.githubusercontent.com/haki-user/bd122a075936b2837ef5a4909cda374c/raw/d2ea8a92794396542589c64924c86c50dca3639d/user.svg" alt="user" />
               </Link>
               <div
                 className="shortcut-item-dropdown"
