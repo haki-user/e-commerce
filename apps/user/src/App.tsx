@@ -20,7 +20,6 @@ axios.defaults.headers.post["Accept"] = "application/json";
 
 function App() {
   const [auth, setAuth] = useRecoilState(authState);
-
   const initUser = async () => {
     if (!auth.token) {
       return;
@@ -50,6 +49,7 @@ function App() {
   useEffect(() => {
     if(auth.username && auth.token) return;
     initUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   return (

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-
+import { authState } from "recoil-state";
+import { useSetRecoilState } from "recoil";
 import "./loginCard.css";
 
 export const LoginCard: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const setAuthState = useSetRecoilState(authState);
   const navigate = useNavigate();
 
   const login: React.FormEventHandler = async (e) => {
@@ -22,6 +24,9 @@ export const LoginCard: React.FC = () => {
         return;
       }
       localStorage.setItem("token", res.data.token);
+      setAuthState((prev) => {
+        return { ...prev, token: res.data.token };
+      });
       navigate(-1);
     } catch (e) {
       console.log(e);
