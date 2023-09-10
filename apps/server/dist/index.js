@@ -46,11 +46,11 @@ const app = (0, express_1.default)();
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use('/items', items_1.default);
-app.use('/auth', auth_1.default);
-app.use('/cart', cart_routes_1.default);
-app.use('/orders', order_routes_1.default);
-app.use('/products', product_routes_1.default);
+app.use('/api/items', items_1.default);
+app.use('/api/auth', auth_1.default);
+app.use('/api/cart', cart_routes_1.default);
+app.use('/api/orders', order_routes_1.default);
+app.use('/api/products', product_routes_1.default);
 app.listen(PORT, () => {
     console.log(`Listening on port  ${PORT}`);
 });

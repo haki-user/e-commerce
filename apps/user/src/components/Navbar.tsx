@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { authState } from "recoil-state";
 import { useRecoilState } from "recoil";
 import "./navbar.css";
-import NavAppLogo from "../assets/navAppLogo.svg";
+import NavAppLogo from "!file-loader!../assets/navAppLogo.svg";
 import NavUserIcon from "../assets/NavUserIcon.svg";
 import NavSearchIcon from "../assets/NavSearchIcon.svg";
 import NavCartIcon from "../assets/NavCartIcon.svg";
