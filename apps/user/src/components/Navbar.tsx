@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import { authState } from "recoil-state";
 import { useRecoilState } from "recoil";
 import "./navbar.css";
-// import { ReactComponent as NavAppLogo } from "../assets/navAppLogo.svg";
-// import { ReactComponent as NavUserIcon } from "../assets/NavUserIcon.svg";
-// import { ReactComponent as NavSearchIcon } from "../assets/NavSearchIcon.svg";
-// import { ReactComponent as NavCartIcon } from "../assets/NavCartIcon.svg";
 
 export const Navbar: React.FC = () => {
   const [user, setUser] = useRecoilState(authState);

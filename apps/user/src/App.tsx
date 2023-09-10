@@ -31,25 +31,35 @@ function App() {
         console.log(res.data?.message);
         return;
       }
-      console.log("res",res.data);
+      console.log("res", res.data);
       setAuth((prev) => {
         return { ...prev, username: res.data.username };
       });
-    } catch (e) {
-      if(e?.response.status == 401) {
-        localStorage.removeItem("token");
-        setAuth((prev) => {
-          return { ...prev, token: "", username: "" };
-        });
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        // console.log(err.response?.data)
+        if (!err?.response) {
+          console.log("No Server Response");
+        } else if (err.response?.status === 400) {
+          console.log("Missing Username or Password");
+        } else if (err.response?.status === 401) {
+          localStorage.removeItem("token");
+          console.log("Unauthorized");
+          setAuth((prev) => {
+            return { ...prev, token: "", username: "" };
+          });
+        } else {
+          console.log("Login Failed");
+        }
       }
-      console.log(e);
+      console.log(err);
     }
   };
 
   useEffect(() => {
-    if(auth.username && auth.token) return;
+    if (auth.username && auth.token) return;
     initUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   return (
@@ -61,7 +71,7 @@ function App() {
         {/* <Route path="/" element={<Appbar />} /> */}
         <Route path="/" element={<Landing />} />
         {/* <Route path="store" element={auth.token && auth.username ? <Store /> : <Login />} /> */}
-        <Route path="store" element={<Store /> } />
+        <Route path="store" element={<Store />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="store/:id" element={<ProductPage />} />

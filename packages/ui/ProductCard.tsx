@@ -13,6 +13,7 @@ export const ProductCard: React.FC<{ img:string, name:string, description: strin
             width: "18vw",
             height: "32vw",
             overflow: "hidden",
+            ...rest
         }}>
             <img src={img} alt="yede" style={{
                 width: "100%",

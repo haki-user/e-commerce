@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { authState } from "recoil-state";
 import axios from "axios";
 import "./productPage.css";
 
-export const ProductPage: React.FC = () => {
-  const [product, setProduct] = useState<{
-    img: string,
+
+interface Product {
+  img: string,
     name: string,
     description: string,
     specs?: string,
     price: number,
-  }>({ img: "", name: "", description: "", price: 0 });
-  const [quantity, setQuantity] = useState<number>(0);
+}
+
+export const ProductPage: React.FC = () => {
+  const [product, setProduct] = useState<Product>({ img: "", name: "", description: "", price: 0 });
+  const auth = useRecoilValue(authState);
+  const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
 
@@ -23,14 +29,22 @@ export const ProductPage: React.FC = () => {
   }, [id]);
 
   const buy = async () => {
-
+    if(!auth.username) {
+      navigate("/login");
+      return;
+    }
+    console.log("purchased");
   }
 
   const addToCart = async () => {
+    if(!auth.username) {
+      navigate("/login");
+      return;
+    }
     try{
         const res = await axios.post('/cart', {
             product,
-            quantity,
+            quantity: 1
         });
         if(res.status != 200) {
             return console.log("Not cart");
