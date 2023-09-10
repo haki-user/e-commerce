@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ProductCard } from "ui";
 import axios from 'axios';
 // const data = [
@@ -57,6 +58,7 @@ export const Store: React.FC = () => {
     const fetchData = async () => {
         const res = await axios.get("/products/");
         if(res.status == 200) setData(res.data.products);
+        console.log(res.data.products);
     }
     useEffect(() => {
         fetchData();
@@ -114,9 +116,11 @@ export const Store: React.FC = () => {
           rest={{ width: "100px" }}
         /> */}
         {
-            data.map(({img, name, description, price}, idx) => {
+            data.map(({_id, img, name, description, price}, idx) => {
                 return (
+                   <Link to={`/store/${_id}`} style={{ textDecoration: "none", color: "inherit" }}>
                     <ProductCard key={idx} img={img} name={name} description={description} price={price} />
+                   </Link> 
                 )
             })
         }
