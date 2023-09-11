@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
-import { authState } from "recoil-state";
 import { useSetRecoilState } from "recoil";
+import axios, { AxiosResponse, AxiosError } from "axios";
+import { authState } from "recoil-state";
+import { SnackbarType } from "./Snackbar";
+import { useSnackbar } from "./SnackbarService";
 import "./loginCard.css";
 
 export const LoginCard: React.FC = () => {
@@ -11,24 +13,38 @@ export const LoginCard: React.FC = () => {
   const setAuthState = useSetRecoilState(authState);
   const navigate = useNavigate();
 
+  const { showSnackbar } = useSnackbar();
+
   const login: React.FormEventHandler = async (e) => {
     e.preventDefault();
     try {
       const res: AxiosResponse<{ message: string; token: string }> =
         await axios.post("/auth/login", {
-          username:email,
+          username: email,
           password,
         });
       if (res.status != 200) {
         console.log(res.data?.message);
+        showSnackbar(SnackbarType.ERROR, res.data?.message || "Login Failed");
         return;
       }
+
       localStorage.setItem("token", res.data.token);
       setAuthState((prev) => {
         return { ...prev, token: res.data.token };
       });
+
+      showSnackbar(SnackbarType.SUCCESS, "Logged In");
       navigate(-1);
     } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<{ message: string }>;
+        showSnackbar(
+          SnackbarType.ERROR,
+          axiosError.response?.data.message || axiosError.message
+        );
+        return;
+      }
       console.log(e);
     }
   };
@@ -124,7 +140,11 @@ export const LoginCard: React.FC = () => {
         <span>
           <p>
             Don't have an account?{" "}
-            <Link to="/signup" style={{ textDecoration: "none" }} replace={true} >
+            <Link
+              to="/signup"
+              style={{ textDecoration: "none" }}
+              replace={true}
+            >
               <span className="textSignup">Sign up</span>
             </Link>
           </p>

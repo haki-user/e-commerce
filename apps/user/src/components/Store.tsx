@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ProductCard } from "ui";
-import axios from 'axios';
+import axios, { AxiosError } from "axios";
+import { ProductCard, SnackbarType, useSnackbar } from "ui";
 // const data = [
 //   {
 //     img: "https://rukminim2.flixcart.com/image/612/612/xif0q/book/v/p/3/attack-on-titan-1-original-imagges7ddrfvuvn.jpeg?q=70  ",
@@ -53,16 +53,30 @@ import axios from 'axios';
 //   },
 // ];
 export const Store: React.FC = () => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const { showSnackbar } = useSnackbar();
 
-    const fetchData = async () => {
-        const res = await axios.get("/products/");
-        if(res.status == 200) setData(res.data.products);
-        console.log(res.data.products);
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/products/");
+      if (res.status == 200) setData(res.data.products);
+      console.log(res.data.products);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<{ message: string }>;
+        showSnackbar(
+          SnackbarType.ERROR,
+          axiosError.response?.data.message || axiosError.message
+        );
+        return;
+      }
+      console.log(e);
     }
-    useEffect(() => {
-        fetchData();
-    }, []);
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div
       style={{
@@ -79,13 +93,13 @@ export const Store: React.FC = () => {
           maxWidth: 280,
         }}
       >
-        <div style={{
+        <div
+          style={{
             width: "100%",
             height: "100%   ",
             backgroundColor: "white",
-        }}>
-
-        </div>
+          }}
+        ></div>
       </section>
       <section
         style={{
@@ -115,15 +129,22 @@ export const Store: React.FC = () => {
           price={500}
           rest={{ width: "100px" }}
         /> */}
-        {
-            data.map(({_id, img, name, description, price}, idx) => {
-                return (
-                   <Link to={`/store/${_id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                    <ProductCard key={idx} img={img} name={name} description={description} price={price} />
-                   </Link> 
-                )
-            })
-        }
+        {data.map(({ _id, img, name, description, price }, idx) => {
+          return (
+            <Link
+              key={idx}
+              to={`/store/${_id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <ProductCard
+                img={img}
+                name={name}
+                description={description}
+                price={price}
+              />
+            </Link>
+          );
+        })}
       </section>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
 // import { counterState } from 'recoil-state';
@@ -10,6 +10,8 @@ import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
 import { ProductPage } from "./components/ProductPage";
 import { Navbar } from "./components/Navbar";
+import { Snackbar, SnackbarType } from "ui/Snackbar";
+import { useSnackbar } from "ui";
 // import ulquiorra from './assets/init_d.jpg';
 import axios from "axios";
 
@@ -18,8 +20,10 @@ axios.defaults.baseURL = "http://16.171.93.79:5000/api/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
 
-function App() {
+const App: React.FC = () => {
   const [auth, setAuth] = useRecoilState(authState);
+  const { showSnackbar } = useSnackbar();
+
   const initUser = async () => {
     if (!auth.token) {
       return;
@@ -29,20 +33,17 @@ function App() {
       const res = await axios.post("/auth/me");
       if (res.status != 200) {
         console.log(res.data?.message);
+        showSnackbar(SnackbarType.ERROR, res.data?.message || "Login Failed");
         return;
       }
       console.log("res", res.data);
       setAuth((prev) => {
         return { ...prev, username: res.data.username };
       });
+      showSnackbar(SnackbarType.INFO, `Welcome ${res.data.username}`);
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        // console.log(err.response?.data)
-        if (!err?.response) {
-          console.log("No Server Response");
-        } else if (err.response?.status === 400) {
-          console.log("Missing Username or Password");
-        } else if (err.response?.status === 401) {
+        if (err.response?.status === 401) {
           localStorage.removeItem("token");
           console.log("Unauthorized");
           setAuth((prev) => {
@@ -51,7 +52,9 @@ function App() {
         } else {
           console.log("Login Failed");
         }
+        return;
       }
+      showSnackbar(SnackbarType.ERROR, String(err));
       console.log(err);
     }
   };
@@ -67,6 +70,7 @@ function App() {
       {/* <Appbar /> */}
       {/* <img src={ulquiorra} style={{ position: "fixed", width: "100%", minWidth: 1500, height: "100%", minHeight: 650, zIndex: -1, opacity: 1, overflow: "scroll"}}/> */}
       <Navbar />
+      <Snackbar />
       <Routes>
         {/* <Route path="/" element={<Appbar />} /> */}
         <Route path="/" element={<Landing />} />
@@ -78,6 +82,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
