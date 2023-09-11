@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { SnackbarState, SnackbarStateType } from "recoil-state";
 
 export enum SnackbarType {
@@ -66,7 +66,7 @@ export const Snackbar: React.FC = () => {
       if (slideOutTimer.current) clearTimeout(slideOutTimer.current);
       if (hideTimer.current) clearTimeout(hideTimer.current);
     };
-  }, [show]);
+  }, [state]);
 
   return show === true ? (
     <div
@@ -90,7 +90,7 @@ export const Snackbar: React.FC = () => {
         padding: 5,
         transition: "all 0.3s ease-in-out",
         zIndex: 5000,
-        transform: state.transform,
+        transform: transform,
       }}
     >
       <div
