@@ -38,3 +38,8 @@ export const SnackbarState = atom<SnackbarStateType>({
     transform: "translateX(110%)",
   },
 });
+
+export const searchState = atom<string>({
+  key: "searchState",
+  default: "",
+});

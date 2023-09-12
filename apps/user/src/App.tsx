@@ -67,14 +67,11 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      {/* <Appbar /> */}
       {/* <img src={ulquiorra} style={{ position: "fixed", width: "100%", minWidth: 1500, height: "100%", minHeight: 650, zIndex: -1, opacity: 1, overflow: "scroll"}}/> */}
       <Navbar />
       <Snackbar />
       <Routes>
-        {/* <Route path="/" element={<Appbar />} /> */}
         <Route path="/" element={<Landing />} />
-        {/* <Route path="store" element={auth.token && auth.username ? <Store /> : <Login />} /> */}
         <Route path="store" element={<Store />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />

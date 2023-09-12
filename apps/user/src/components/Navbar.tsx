@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { authState } from "recoil-state";
 import { useRecoilState } from "recoil";
+import { SearchBar } from "ui";
 import "./navbar.css";
 
 export const Navbar: React.FC = () => {
@@ -51,7 +52,8 @@ export const Navbar: React.FC = () => {
             paddingRight: 8,
           }}
         >
-          <div
+          <SearchBar />
+          {/* <div
             className="nav_search_input"
             style={{ display: "none", paddingLeft: 8, paddingRight: 8 }}
           >
@@ -72,7 +74,7 @@ export const Navbar: React.FC = () => {
             style={{ width: 24, paddingLeft: 8, paddingRight: 8 }}
           >
             <img src="https://gist.githubusercontent.com/haki-user/42fe4f45c23717405c379bd4ac38120d/raw/01bcffd864ba95b34a11c08fbae51db4db2964bc/search.svg" alt="search" />
-          </div>
+          </div> */}
         </li>
 
         <li className="nav-cart" style={{ paddingLeft: 8, paddingRight: 8 }}>

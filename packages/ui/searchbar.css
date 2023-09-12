@@ -1,0 +1,69 @@
+/* searchbar.css */
+
+.searchbar {
+  display: flex;
+  align-items: center;
+}
+
+.expanded-input {
+  box-sizing: border-box;
+  min-height: 40px;
+  width: 0;
+  overflow: hidden;
+  transition: none;
+  margin-left: 0;
+  border: none;
+  outline: none;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: inherit;
+  font-size: 15px;
+}
+
+.expanded-input-show {
+  box-sizing: border-box;
+  background-color: inherit;
+  width: 150px; /* Adjust the width as needed */
+  min-height: 40px;
+  border: none; /* Add desired styles for the input field */
+  border-radius: 999px;
+  padding: 5px;
+  padding-left: 15px;
+  background-position: left center; /* Move the background image to the left */
+  font-size: 15px;
+  transition: 2s all ease;
+}
+
+/* Add any additional styles you need for the search icon inside the input */
+
+.expanded-search-container-show {
+  /* width: auto; */
+  min-width: max-content;
+  max-width: 200px;
+  min-height: max-content;
+  /* background-color: #ddd; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 999px;
+  /* transition: all 2s ease;  */
+}
+
+.expanded-search-container {
+  /* width: auto; */
+  min-width: max-content;
+  max-width: 200px;
+  min-height: max-content;
+  /* background-color: #ddd; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 999px;
+  transition: all 2s ease;
+  /* transition: none;  */
+}
+
+.search-icon:hover {
+    cursor: pointer;
+}
