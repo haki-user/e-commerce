@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import { useRecoilState } from "recoil";
-import { searchState } from "recoil-state";
+// import { useRecoilState } from "recoil";
+// import { searchState } from "recoil-state";
 import { useNavigate } from "react-router-dom";
 import "./searchbar.css";
 
