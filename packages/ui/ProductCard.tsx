@@ -1,13 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./productCard.css";
 
 export const ProductCard: React.FC<{
+  _id: string;
   img: string;
   name: string;
   description: string;
   price: number;
   rest?: any;
-}> = ({ img, name, description, price, rest }) => {
+}> = ({ img, name, description, price, _id, rest }) => {
   return (
     <div
       className="product-card"
@@ -24,25 +26,28 @@ export const ProductCard: React.FC<{
         ...rest,
       }}
     >
-      <img
-        src={img}
-        alt="yede"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "fill",
-          minHeight: "80%",
-          margin: 0,
-        }}
-      />
-      <p
+      <Link to={`/store/${_id}`}>
+        <img
+          src={img}
+          alt="yede"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "fill",
+            minHeight: "80%",
+            margin: 0,
+          }}
+        />
+      </Link>
+      <Link
+        to={`/store/${_id}`}
         className="productCard-title"
         style={{
           width: "100%",
         }}
       >
         {name}
-      </p>
+      </Link>
       <p
         className="productCard-description"
         style={{
@@ -51,7 +56,9 @@ export const ProductCard: React.FC<{
       >
         {description}
       </p>
-      <p className="productCard-price">₹{price}</p>
+      <Link to={`/store/${_id}`} className="productCard-price">
+        ₹{price}
+      </Link>
     </div>
   );
 };

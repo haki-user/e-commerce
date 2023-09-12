@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { ProductCard, SnackbarType, useSnackbar } from "ui";
 // const data = [
@@ -131,18 +130,20 @@ export const Store: React.FC = () => {
         /> */}
         {data.map(({ _id, img, name, description, price }, idx) => {
           return (
-            <Link
-              key={idx}
-              to={`/store/${_id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
+            // <Link
+            //   key={idx}
+            //   to={`/store/${_id}`}
+            //   style={{ textDecoration: "none", color: "inherit" }}
+            // >
               <ProductCard
+                key={idx}
+                _id={_id}
                 img={img}
                 name={name}
                 description={description}
                 price={price}
               />
-            </Link>
+            // </Link>
           );
         })}
       </section>

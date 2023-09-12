@@ -34,7 +34,7 @@ export const SnackbarState = atom<SnackbarStateType>({
     type: SnackbarType.INFO,
     message: "",
     show: false,
-    duration: 3000,
+    duration: 4000,
     transform: "translateX(100%)",
   },
 });

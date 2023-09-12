@@ -33,7 +33,7 @@ export const Snackbar: React.FC = () => {
         ...prev,
         show: false,
         message: "",
-        transform: "translateX(100%)",
+        transform: "translateX(110%)",
       };
     });
   };
@@ -49,8 +49,9 @@ export const Snackbar: React.FC = () => {
     }
     hideTimer.current = setTimeout(() => {
       console.log("hideTimer");
+      if(slideOutTimer.current) clearTimeout(slideOutTimer.current);
       hideSnackbar();
-    }, duration + 1000);
+    }, duration + 1400);
 
     if (slideOutTimer.current) {
       clearTimeout(slideOutTimer.current);
@@ -58,7 +59,7 @@ export const Snackbar: React.FC = () => {
     slideOutTimer.current = setTimeout(() => {
       console.log("slideOutTimer");
       setState((prev) => {
-        return { ...prev, transform: "translateX(100%)" };
+        return { ...prev, transform: "translateX(110%)" };
       });
     }, duration);
 
@@ -66,9 +67,9 @@ export const Snackbar: React.FC = () => {
       if (slideOutTimer.current) clearTimeout(slideOutTimer.current);
       if (hideTimer.current) clearTimeout(hideTimer.current);
     };
-  }, [state]);
+  }, [show]);
 
-  return show === true ? (
+  return true === true ? (
     <div
       className="snackbar"
       style={{
