@@ -3,7 +3,7 @@ import './card.css';
 
 export const Card: React.FC<{  text?: {title: string, textClass?:string, description: string}, img: string, rest?:any }> = ({ text, img, rest={ width:"47vw", height: "31vw"} }) => {
     const {title, textClass, description} = {title:"", textClass:" ", description:"", ...text};
-    console.log(rest);
+    // console.log(rest);
     // boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
 
     return (
