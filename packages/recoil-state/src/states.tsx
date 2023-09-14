@@ -43,3 +43,9 @@ export const searchState = atom<string>({
   key: "searchState",
   default: "",
 });
+
+// query could be {name="apple", price=100, category="fruit"}
+export const queryState = atom<{ [key: string]: string }>({
+  key: "queryState",
+  default: {},
+});

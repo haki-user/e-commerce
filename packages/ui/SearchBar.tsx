@@ -2,19 +2,25 @@ import React, { useState, useEffect, useRef } from "react";
 // import { useRecoilState } from "recoil";
 // import { searchState } from "recoil-state";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { queryState } from "recoil-state";
 import "./searchbar.css";
 
 export const SearchBar: React.FC = () => {
   //   const [search, setSearch] = useRecoilState(searchState);
   const [input, setInput] = useState("");
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const setQuery = useSetRecoilState(queryState);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e.key);
     if (e.key === "Enter") {
       //   setSearch(input);
-      navigate(`/search${input ? `?q=${input}` : ""}`);
+      setQuery((prev) => ({ ...prev, name: input }));
+      // navigate(`/search${input ? `?q=${input}` : ""}`);
+      navigate("/store");
     }
   };
 

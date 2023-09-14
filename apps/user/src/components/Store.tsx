@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
+import { useRecoilValue } from "recoil";
+import { queryState } from "recoil-state";
 import { ProductCard, SnackbarType, useSnackbar } from "ui";
 // const data = [
 //   {
@@ -54,10 +56,14 @@ import { ProductCard, SnackbarType, useSnackbar } from "ui";
 export const Store: React.FC = () => {
   const [data, setData] = useState([]);
   const { showSnackbar } = useSnackbar();
+  const query = useRecoilValue(queryState);
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("/products/");
+      // console.log(query);
+      const res = await axios.get("/products/search", {
+        params: query,
+      });
       if (res.status == 200) setData(res.data.products);
       console.log(res.data.products);
     } catch (e) {
@@ -75,7 +81,7 @@ export const Store: React.FC = () => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
   return (
     <div
       style={{
@@ -135,14 +141,14 @@ export const Store: React.FC = () => {
             //   to={`/store/${_id}`}
             //   style={{ textDecoration: "none", color: "inherit" }}
             // >
-              <ProductCard
-                key={idx}
-                _id={_id}
-                img={img}
-                name={name}
-                description={description}
-                price={price}
-              />
+            <ProductCard
+              key={idx}
+              _id={_id}
+              img={img}
+              name={name}
+              description={description}
+              price={price}
+            />
             // </Link>
           );
         })}
