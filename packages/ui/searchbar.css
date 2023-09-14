@@ -1,4 +1,4 @@
-/* searchbar.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 
 .searchbar {
   display: flex;
@@ -66,4 +66,48 @@
 
 .search-icon:hover {
     cursor: pointer;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  color: #fff;
+  padding: 9px;
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  z-index: 15000;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.custom-tooltip-trigger {
+  position: relative;
+}
+
+.custom-tooltip-trigger:hover + .tooltip {
+  display: block;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15000;
+  animation: tooltipFadeIn 0.2s ease-in-out 0.4s forwards;
+}
+
+@keyframes tooltipFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.tooltip-key {
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 3px;
+  margin-right: 2px;
+  font-weight: 400;
+  font-size: 12px;
 }
