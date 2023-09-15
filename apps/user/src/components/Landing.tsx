@@ -1,11 +1,14 @@
 import React from "react";
 import { Card } from "ui";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { queryState } from "recoil-state";
 import "./landing.css";
 
 // import bleach from "../assets/bleach.jpg";
 // import ulquiorra from "../assets/ulquiorra.jpg";
 export const Landing: React.FC = () => {
+  const setQuery = useSetRecoilState(queryState);
   return (
     // stop overflow on landing page card container div have right padding 10px
     <div
@@ -27,6 +30,7 @@ export const Landing: React.FC = () => {
           to="/store"
           style={{ gridColumn: "1/13", height: "31vw", position: "relative" }}
           className="dark-card"
+          onClick={() => {setQuery({})}}
         >
           <Card
             img={
