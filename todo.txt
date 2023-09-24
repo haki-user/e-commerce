@@ -1,2 +1,0 @@
-Add ssl certificate
-Add cashing memoization server side, client side
