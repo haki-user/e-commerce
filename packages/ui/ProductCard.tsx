@@ -27,17 +27,19 @@ export const ProductCard: React.FC<{
       }}
     >
       <Link to={`/store/${_id}`}>
-        <img
-          src={img}
-          alt="yede"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "fill",
-            minHeight: "80%",
-            margin: 0,
-          }}
-        />
+        <div style={{ minHeight: "25vw" }}>
+          <img
+            src={img}
+            alt="yede"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "fill",
+              minHeight: "80%",
+              margin: 0,
+            }}
+          />
+        </div>
       </Link>
       <Link
         to={`/store/${_id}`}
