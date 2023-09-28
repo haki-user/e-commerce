@@ -4,7 +4,7 @@ import { getCartController, addToCartController } from "../controllers/cart";
 
 const router: Router = express.Router();
 
-router.get('/', authMiddleware, getCartController);
-router.post('/', authMiddleware, addToCartController);
+router.get("/", authMiddleware, getCartController);
+router.post("/", authMiddleware, addToCartController);
 
 export default router;

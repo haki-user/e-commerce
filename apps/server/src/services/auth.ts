@@ -18,13 +18,13 @@ export const verifyToken = (token: string) => {
     return jwt.verify(token, JWT_SECRET) as { username: string };
 }
 
-export const register = async ( username: string, password: string): Promise<{ token: string }> => {
+export const register = async ( firstName:string, lastName:string, username: string, password: string): Promise<{ token: string }> => {
     const existingUser = await User.findOne({ username });
     if(existingUser) {
         throw new Error("User already exists");
     }   
 
-    const user = new User({ username, password });
+    const user = new User({ username, password, firstName, lastName });
     await user.save();
     return { token: genToken(username) };
 }
