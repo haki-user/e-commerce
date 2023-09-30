@@ -72,6 +72,7 @@ export const Store: React.FC = () => {
                 padding: 16,
                 color: "grey",
               }}
+              onClick={() => setFilterExpanded((prev) => !prev)}
             >
               Filters
               <span
@@ -94,7 +95,7 @@ export const Store: React.FC = () => {
                 ▼
               </span>
             </div>
-            <ul>
+            <ul style={{ display: filterExpanded ? "none" : "initial" }}>
               <li>Under:</li>
               <ul>
                 <li>-----------------</li>
@@ -139,9 +140,9 @@ export const Store: React.FC = () => {
               </span>
             </div>
             <select typeof="radio">
-              <option>Lowest Price</option>
-              <option>Highest Price</option>
-              <option>Relavance</option>
+              <option value="lt">Lowest Price</option>
+              <option value="gt">Highest Price</option>
+              <option value="relavance">Relavance</option>
             </select>
           </div>
         </div>
@@ -190,7 +191,7 @@ export const Store: React.FC = () => {
             <img
               src={"https://media.tenor.com/pHoLtiJJRYgAAAAC/zoro-run.gif"}
               alt="loading"
-              style={{ width: "12vw"}}
+              style={{ width: "12vw" }}
             />
           </div>
         ) : (
