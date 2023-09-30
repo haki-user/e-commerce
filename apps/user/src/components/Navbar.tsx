@@ -163,7 +163,7 @@ export const Navbar: React.FC = () => {
                   {user.username && user.token ? (
                     <>
                       <Link to="/profile" className="link">
-                        {user.username}
+                        {user.firstName}
                       </Link>
                       <div
                         style={{

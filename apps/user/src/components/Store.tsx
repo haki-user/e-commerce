@@ -54,6 +54,8 @@ import { ProductCard, SnackbarType, useSnackbar } from "ui";
 //   },
 // ];
 export const Store: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [filterExpanded, setFilterExpanded] = useState(false);
   const [data, setData] = useState([]);
   const { showSnackbar } = useSnackbar();
   const query = useRecoilValue(queryState);
@@ -65,7 +67,7 @@ export const Store: React.FC = () => {
         params: query,
       });
       if (res.status == 200) setData(res.data.products);
-      console.log(res.data.products);
+      // console.log(res.data.products);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<{ message: string }>;
@@ -76,6 +78,8 @@ export const Store: React.FC = () => {
         return;
       }
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -86,6 +90,7 @@ export const Store: React.FC = () => {
     <div
       style={{
         display: "flex",
+        height: "100vh",
       }}
     >
       <section
@@ -96,15 +101,99 @@ export const Store: React.FC = () => {
           marginRight: 0,
           flexBasis: 350,
           maxWidth: 280,
+          height: 100,
         }}
       >
         <div
           style={{
             width: "100%",
-            height: "100%   ",
+            minHeight: "max-content",
             backgroundColor: "white",
+            display: "flex",
+            flexDirection: "column",
           }}
-        ></div>
+        >
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                fontSize: 18,
+                fontWeight: "500",
+                padding: 16,
+                color: "grey",
+              }}
+            >
+              Filters
+              <span
+                style={{
+                  fontSize: 12,
+                  fontFamily: "consolas",
+                  fontWeight: 400,
+                  border: "1px solid grey",
+                  borderRadius: "99999999px",
+                  paddingLeft: 4,
+                  paddingRight: 4,
+                  paddingBottom: 0,
+                  paddingTop: 0,
+                  margin: 5,
+                  cursor: "pointer",
+                  transition: "all 0.3s ease-in-out",
+                  transform: "initial",
+                }}
+              >
+                ▼
+              </span>
+            </div>
+            <ul>
+              <li>Under:</li>
+              <ul>
+                <li>-----------------</li>
+              </ul>
+              <li>
+                Category:
+                <ul>
+                  <li>Book</li>
+                  <li>Figure</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                fontSize: 18,
+                fontWeight: "500",
+                padding: 16,
+                color: "grey",
+              }}
+            >
+              Sort
+              <span
+                style={{
+                  fontSize: 12,
+                  fontFamily: "consolas",
+                  fontWeight: 400,
+                  border: "1px solid grey",
+                  borderRadius: "99999999px",
+                  paddingLeft: 4,
+                  paddingRight: 4,
+                  paddingBottom: 0,
+                  paddingTop: 0,
+                  margin: 5,
+                  cursor: "pointer",
+                  transition: "all 0.3s ease-in-out",
+                  transform: "initial",
+                }}
+              >
+                ▼
+              </span>
+            </div>
+            <select typeof="radio">
+              <option>Lowest Price</option>
+              <option>Highest Price</option>
+              <option>Relavance</option>
+            </select>
+          </div>
+        </div>
       </section>
       <section
         style={{
@@ -114,6 +203,7 @@ export const Store: React.FC = () => {
           display: "flex",
           flexWrap: "wrap",
           gap: 1,
+          overflow: "scroll",
         }}
       >
         {/* <ProductCard
@@ -134,24 +224,45 @@ export const Store: React.FC = () => {
           price={500}
           rest={{ width: "100px" }}
         /> */}
-        {data.map(({ _id, img, name, description, price }, idx) => {
-          return (
-            // <Link
-            //   key={idx}
-            //   to={`/store/${_id}`}
-            //   style={{ textDecoration: "none", color: "inherit" }}
-            // >
-            <ProductCard
-              key={idx}
-              _id={_id}
-              img={img}
-              name={name}
-              description={description}
-              price={price}
+
+        {isLoading ? (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#FCFEFC",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center ",
+            }}
+          >
+            <img
+              src={"https://media.tenor.com/pHoLtiJJRYgAAAAC/zoro-run.gif"}
+              alt="loading"
+              style={{ width: "12vw"}}
             />
-            // </Link>
-          );
-        })}
+          </div>
+        ) : (
+          data.map(({ _id, img, name, description, price }, idx) => {
+            return (
+              // <Link
+              //   key={idx}
+              //   to={`/store/${_id}`}
+              //   style={{ textDecoration: "none", color: "inherit" }}
+              // >
+              <ProductCard
+                key={idx}
+                _id={_id}
+                img={img}
+                name={name}
+                description={description}
+                price={price}
+                rest={{ minWidth: "245px", minHeight: "437px" }}
+              />
+              // </Link>
+            );
+          })
+        )}
       </section>
     </div>
   );

@@ -25,7 +25,7 @@ export const doubledCounterState = selector({
 
 export const authState = atom<IUser>({
   key: "authState",
-  default: { token: localStorage.getItem("token") || "", username: "" },
+  default: { token: localStorage.getItem("token") || "", username: "", firstName: "", lastName: "" },
 });
 
 export const SnackbarState = atom<SnackbarStateType>({

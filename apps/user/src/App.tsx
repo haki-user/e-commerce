@@ -15,7 +15,7 @@ import { useSnackbar } from "ui";
 // import ulquiorra from './assets/init_d.jpg';
 import axios from "axios";
 
-axios.defaults.baseURL = "http://16.171.93.79:5000/api/";
+axios.defaults.baseURL = "http://localhost:5000/api/";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
@@ -37,17 +37,19 @@ const App: React.FC = () => {
         return;
       }
       console.log("res", res.data);
+      const {username, firstName, lastName} = res.data;
+      console.log(username, firstName, lastName);
       setAuth((prev) => {
-        return { ...prev, username: res.data.username };
+        return { ...prev, username, firstName, lastName};
       });
-      showSnackbar(SnackbarType.INFO, `Welcome ${res.data.username}`);
+      showSnackbar(SnackbarType.INFO, `Welcome ${firstName} ${lastName}!`);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 401) {
           localStorage.removeItem("token");
           console.log("Unauthorized");
           setAuth((prev) => {
-            return { ...prev, token: "", username: "" };
+            return { ...prev, token: "", username: "", firstName: "", lastName: "" };
           });
         } else {
           console.log("Login Failed");
