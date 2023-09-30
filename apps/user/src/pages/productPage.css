@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500&family=Roboto:wght@100;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500&family=Roboto:wght@100;400;500&display=swap");
 
 .product-description-text {
-    width: 100%;
-    height: 100%;
-    font-family: roboto;
+  width: 100%;
+  height: 100%;
+  font-family: roboto;
   color: rgb(33, 33, 33);
   font-size: 14px;
   line-height: 21px;
@@ -11,42 +11,42 @@
 }
 
 .cart-button {
-    background-color: #ff9f00;
-    border: none;
-    color: white;
-    padding: 4px 18px;
-    width: 180px;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 30px;
-    cursor: pointer;
-    margin-right: 10px;
+  background-color: #ff9f00;
+  border: none;
+  color: white;
+  padding: 4px 18px;
+  width: 180px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 30px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
 .buy-button {
-    background-color: rgb(236, 61, 37);
-    border: none;
-    color: white;
-    padding: 4px 18px;
-    width: 180px;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 30px;
-    cursor: pointer;
+  background-color: rgb(236, 61, 37);
+  border: none;
+  color: white;
+  padding: 4px 18px;
+  width: 180px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 30px;
+  cursor: pointer;
 }
 
 div * {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
-    ::-webkit-scrollbar-track {
-      -webkit-box-shadow: none !important;
-      background-color: transparent;
-    }
-    ::-webkit-scrollbar {
-      width: 3px !important;
-      background-color: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: transparent;
-    }
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: none !important;
+    background-color: transparent;
   }
+  ::-webkit-scrollbar {
+    width: 3px !important;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}

@@ -34,10 +34,10 @@ const App: React.FC = () => {
         return;
       }
       console.log("res", res.data);
-      const {username, firstName, lastName} = res.data;
+      const { username, firstName, lastName } = res.data;
       console.log(username, firstName, lastName);
       setAuth((prev) => {
-        return { ...prev, username, firstName, lastName};
+        return { ...prev, username, firstName, lastName };
       });
       showSnackbar(SnackbarType.INFO, `Welcome ${firstName} ${lastName}!`);
     } catch (err) {
@@ -46,7 +46,13 @@ const App: React.FC = () => {
           localStorage.removeItem("token");
           console.log("Unauthorized");
           setAuth((prev) => {
-            return { ...prev, token: "", username: "", firstName: "", lastName: "" };
+            return {
+              ...prev,
+              token: "",
+              username: "",
+              firstName: "",
+              lastName: "",
+            };
           });
         } else {
           console.log("Login Failed");
