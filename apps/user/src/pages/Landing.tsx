@@ -30,12 +30,12 @@ export const Landing: React.FC = () => {
           to="/store"
           style={{ gridColumn: "1/13", height: "31vw", position: "relative" }}
           className="dark-card"
-          onClick={() => {setQuery({})}}
+          onClick={() => {
+            setQuery({});
+          }}
         >
           <Card
-            img={
-              "https://i.ibb.co/689qL6r/cover0-3.png"
-            }
+            img={"https://i.ibb.co/689qL6r/cover0-3.png"}
             rest={{ width: "100%", height: "33vw" }}
           />
           <div className="card-info-container">
@@ -68,14 +68,19 @@ export const Landing: React.FC = () => {
           <div className="card-info-container">
             <div className="card-info">
               <div className="info-heading">Dragon Ball Super, Vol. 13</div>
-              <div className="info-details">English, Paperback, Toriyama Akira</div>
-              <div className="info-price">From ₹1020 <del style={{ fontSize: 14, opacity: 0.5}}>₹1500</del></div>
+              <div className="info-details">
+                English, Paperback, Toriyama Akira
+              </div>
+              <div className="info-price">
+                From ₹1020{" "}
+                <del style={{ fontSize: 14, opacity: 0.5 }}>₹1500</del>
+              </div>
             </div>
           </div>
           {/* rest={{ gridColumn: "1/13" }} */}
         </Link>
       </section>
-      
+
       <section
         className={"section-grid"}
         style={{
@@ -84,7 +89,6 @@ export const Landing: React.FC = () => {
           gap: "1.22222vw",
         }}
       >
-
         <Card
           img={
             "https://i03.appmifile.com/107_operator_in/04/08/2023/c94ac6976ad0718c75ca582867642231.jpg?f=webp"

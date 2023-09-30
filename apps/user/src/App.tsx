@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
-// import { counterState } from 'recoil-state';
 import { authState } from "recoil-state";
-// import { Appbar } from "./components/Appbar";
-import { Landing } from "./components/Landing";
-import { Store } from "./components/Store";
-import { Login } from "./components/Login";
-import { Signup } from "./components/Signup";
-import { ProductPage } from "./components/ProductPage";
+import { Landing } from "./pages/Landing";
+import { Store } from "./pages/Store";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+import { ProductPage } from "./pages/ProductPage";
 import { Navbar } from "./components/Navbar";
 import { Snackbar, SnackbarType } from "ui/Snackbar";
 import { useSnackbar } from "ui";
-// import ulquiorra from './assets/init_d.jpg';
 import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
@@ -69,7 +66,6 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      {/* <img src={ulquiorra} style={{ position: "fixed", width: "100%", minWidth: 1500, height: "100%", minHeight: 650, zIndex: -1, opacity: 1, overflow: "scroll"}}/> */}
       <Navbar />
       <Snackbar />
       <Routes>
