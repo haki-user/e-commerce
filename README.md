@@ -1,3 +1,9 @@
+Live: http://store.port0.org
+- Typescript
+- MERN
+- monorepo
+
+### Turborepo
 
 Run the following command:
 
