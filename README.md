@@ -1,4 +1,5 @@
 Live: http://store.port0.org
+- deployed on aws
 - Typescript
 - MERN
 - monorepo
