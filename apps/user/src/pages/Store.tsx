@@ -81,15 +81,16 @@ export const Store: React.FC = () => {
                   fontFamily: "consolas",
                   fontWeight: 400,
                   border: "1px solid grey",
-                  borderRadius: "99999999px",
-                  paddingLeft: 4,
-                  paddingRight: 4,
+                  borderRadius: "99999px",
+                  paddingLeft: 3.6955,
+                  paddingRight: 3.94,
                   paddingBottom: 0,
                   paddingTop: 0,
                   margin: 5,
                   cursor: "pointer",
-                  transition: "all 0.3s ease-in-out",
-                  transform: "initial",
+                  transition: "all .3s ease-in-out",
+                  display: "inline-block",
+                  transform: filterExpanded ? "rotate(-85deg)" : "initial",
                 }}
               >
                 ▼
