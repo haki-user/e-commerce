@@ -9,6 +9,7 @@
     "generate:component": "turbo gen react-component"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "recoil-state": "*"
   },
   "devDependencies": {

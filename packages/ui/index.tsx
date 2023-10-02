@@ -7,3 +7,4 @@ export * from "./SignupCard";
 export * from "./Snackbar";
 export * from "./SnackbarService";
 export * from "./SearchBar";
+export * from "./MultiRangeSlider"

@@ -3,10 +3,10 @@ import axios, { AxiosError } from "axios";
 import { useRecoilValue } from "recoil";
 import { queryState } from "recoil-state";
 import { ProductCard, SnackbarType, useSnackbar } from "ui";
+import { Filters } from "../components/Filters";
 
 export const Store: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [filterExpanded, setFilterExpanded] = useState(false);
   const [data, setData] = useState([]);
   const { showSnackbar } = useSnackbar();
   const query = useRecoilValue(queryState);
@@ -55,98 +55,7 @@ export const Store: React.FC = () => {
           height: 100,
         }}
       >
-        <div
-          style={{
-            width: "100%",
-            minHeight: "max-content",
-            backgroundColor: "white",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div
-              style={{
-                fontSize: 18,
-                fontWeight: "500",
-                padding: 16,
-                color: "grey",
-              }}
-              onClick={() => setFilterExpanded((prev) => !prev)}
-            >
-              Filters
-              <span
-                style={{
-                  fontSize: 12,
-                  fontFamily: "consolas",
-                  fontWeight: 400,
-                  border: "1px solid grey",
-                  borderRadius: "99999px",
-                  paddingLeft: 3.6955,
-                  paddingRight: 3.94,
-                  paddingBottom: 0,
-                  paddingTop: 0,
-                  margin: 5,
-                  cursor: "pointer",
-                  transition: "all .3s ease-in-out",
-                  display: "inline-block",
-                  transform: filterExpanded ? "rotate(-85deg)" : "initial",
-                }}
-              >
-                ▼
-              </span>
-            </div>
-            <ul style={{ display: filterExpanded ? "none" : "initial" }}>
-              <li>Under:</li>
-              <ul>
-                <li>-----------------</li>
-              </ul>
-              <li>
-                Category:
-                <ul>
-                  <li>Book</li>
-                  <li>Figure</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div
-              style={{
-                fontSize: 18,
-                fontWeight: "500",
-                padding: 16,
-                color: "grey",
-              }}
-            >
-              Sort
-              <span
-                style={{
-                  fontSize: 12,
-                  fontFamily: "consolas",
-                  fontWeight: 400,
-                  border: "1px solid grey",
-                  borderRadius: "99999999px",
-                  paddingLeft: 4,
-                  paddingRight: 4,
-                  paddingBottom: 0,
-                  paddingTop: 0,
-                  margin: 5,
-                  cursor: "pointer",
-                  transition: "all 0.3s ease-in-out",
-                  transform: "initial",
-                }}
-              >
-                ▼
-              </span>
-            </div>
-            <select typeof="radio">
-              <option value="lt">Lowest Price</option>
-              <option value="gt">Highest Price</option>
-              <option value="relavance">Relavance</option>
-            </select>
-          </div>
-        </div>
+        <Filters />
       </section>
       <section
         style={{
