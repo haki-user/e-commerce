@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import MultiRangeSlider from "ui/MultiRangeSlider";
+import { MultiRangeSlider, InputOption, ToggleBox } from "ui";
 import "./filters.css";
+
 const MAX = 15000;
 
 export const Filters: React.FC = () => {
@@ -17,6 +18,7 @@ export const Filters: React.FC = () => {
 
   return (
     <div
+      className="filters-container"
       style={{
         width: "100%",
         minHeight: "max-content",
@@ -43,7 +45,7 @@ export const Filters: React.FC = () => {
           }}
           onClick={() => setFilterExpanded((prev) => !prev)}
         >
-          <span style={{ paddingBottom: 5 }}>Filters</span>
+          <span style={{ paddingBottom: 5 }}>Filter</span>
           <span
             style={{
               cursor: "pointer",
@@ -92,19 +94,14 @@ export const Filters: React.FC = () => {
           <div style={{ marginTop: 16 }}>
             <div style={{ fontWeight: 500 }}>CATEGORIES</div>
             <div>
-              <div style={{ margin: 8 }}>
-                <input className="toggle-box" id="header1" type="checkbox" />
-                <label htmlFor="header1">Books</label>
-                <div className="expand-container">
-                  <div>
+              <ToggleBox text="Books">
+                <div>
                   <InputOption text="Manga" />
-                  </div>
+                  <InputOption text="Comics" />
                 </div>
-              </div>
-              <div style={{ margin: 8 }}>
-                <input className="toggle-box" id="header3" type="checkbox" />
-                <label htmlFor="header3">Action Figures</label>
-              </div>
+              </ToggleBox>
+              <ToggleBox text="Action Figures" />
+              {/* <InputOption text="Action Figures" /> */}
             </div>
           </div>
         </div>
@@ -142,17 +139,6 @@ export const Filters: React.FC = () => {
           </div>
         ) : null}
       </div>
-    </div>
-  );
-};
-
-const InputOption: React.FC<{ text: string }> = ({ text }) => {
-  return (
-    <div style={{ margin: 4, display: "flex" }}>
-      <div>
-        <input type="checkbox" />
-      </div>
-      <div style={{ paddingLeft: 8, fontSize: 14 }}>{text}</div>
     </div>
   );
 };

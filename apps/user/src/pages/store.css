@@ -1,0 +1,12 @@
+@media only screen and (max-width: 600px) {
+  .store-container {
+    height: 150vh !important;
+    flex-direction: column;
+  }
+
+  .filters-section {
+    flex-basis: content !important;
+    max-width: 95vw !important;
+    margin: 5px;
+  }
+}

@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
   useState,
-  useRef
+  useRef,
 } from "react";
 import classnames from "classnames";
 import "./multiRangeSlider.css";
@@ -16,11 +16,11 @@ interface MultiRangeSliderProps {
   onChange: Function;
 }
 
-const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
+export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   min,
   max,
   onChange,
-  width=200
+  width = 200,
 }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
@@ -65,21 +65,21 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   }, [minVal, maxVal, onChange]);
 
   return (
-    <div className="container" style={{ width: width}}>
+    <div className="multiRangeSlider-container" style={{ width: width }}>
       <input
         type="range"
         min={min}
         max={max}
         value={minVal}
         ref={minValRef}
-				step={Math.max((max-min)/100, 100)}
+        step={Math.max((max - min) / 100, 100)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           const value = Math.min(+event.target.value, maxVal - 1);
           setMinVal(value);
           event.target.value = value.toString();
         }}
         className={classnames("thumb thumb--zindex-3", {
-          "thumb--zindex-5": minVal > max - 100
+          "thumb--zindex-5": minVal > max - 100,
         })}
       />
       <input
@@ -88,7 +88,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         max={max}
         value={maxVal}
         ref={maxValRef}
-        step={Math.max((max-min)/100, 100)}
+        step={Math.max((max - min) / 100, 100)}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           const value = Math.max(+event.target.value, minVal + 1);
           setMaxVal(value);

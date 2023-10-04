@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { queryState } from "recoil-state";
 import { ProductCard, SnackbarType, useSnackbar } from "ui";
 import { Filters } from "../components/Filters";
+import "./store.css";
 
 export const Store: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,12 +40,14 @@ export const Store: React.FC = () => {
   }, [query]);
   return (
     <div
+      className="store-container"
       style={{
         display: "flex",
         height: "100vh",
       }}
     >
       <section
+        className="filters-section"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -52,12 +55,13 @@ export const Store: React.FC = () => {
           marginRight: 0,
           flexBasis: 350,
           maxWidth: 280,
-          height: 100,
+          // height: 100,
         }}
       >
         <Filters />
       </section>
       <section
+        className="productCard-section"
         style={{
           width: "100%",
           height: "100%",
@@ -107,11 +111,6 @@ export const Store: React.FC = () => {
         ) : (
           data.map(({ _id, img, name, description, price }, idx) => {
             return (
-              // <Link
-              //   key={idx}
-              //   to={`/store/${_id}`}
-              //   style={{ textDecoration: "none", color: "inherit" }}
-              // >
               <ProductCard
                 key={idx}
                 _id={_id}
@@ -121,7 +120,6 @@ export const Store: React.FC = () => {
                 price={price}
                 rest={{ minWidth: "245px", minHeight: "437px" }}
               />
-              // </Link>
             );
           })
         )}
