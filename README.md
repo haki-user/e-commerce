@@ -78,4 +78,4 @@ Learn more about the power of Turborepo:
 - [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
 
 
-[](https://countme.onrender.com/pvc?username=e-commerce)
+![](https://countme.onrender.com/pvc?username=e-commerce)
