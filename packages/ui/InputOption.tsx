@@ -1,12 +1,27 @@
 import React from "react";
 
-export const InputOption: React.FC<{ text: string }> = ({ text }) => {
+let id = Math.random() * 1000;
+
+export const InputOption: React.FC<{ text: string; callBack: () => void }> = ({
+  text,
+  callBack,
+}) => {
+  const _id = id++ + "" + Date.now();
   return (
     <div style={{ margin: 4, display: "flex" }}>
-      <div>
-        <input type="checkbox" />
-      </div>
-      <div style={{ paddingLeft: 8, fontSize: 14 }}>{text}</div>
+      <input
+        id={_id}
+        type="checkbox"
+        className="cursor-pointer"
+        onClick={callBack}
+      />
+      <label
+        htmlFor={_id}
+        style={{ paddingLeft: 8, fontSize: 14 }}
+        className="cursor-pointer"
+      >
+        {text}
+      </label>
     </div>
   );
 };

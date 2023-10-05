@@ -6,11 +6,22 @@ import { ProductCard, SnackbarType, useSnackbar } from "ui";
 import { Filters } from "../components/Filters";
 import "./store.css";
 
+type Product = {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  img: string;
+};
+
+type sortType = "lt" | "gt" | "relavance";
+
 export const Store: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Product[]>([]);
   const { showSnackbar } = useSnackbar();
   const query = useRecoilValue(queryState);
+  const [sort, setSort] = useState<sortType>("relavance");
 
   const fetchData = async () => {
     try {
@@ -19,7 +30,6 @@ export const Store: React.FC = () => {
         params: query,
       });
       if (res.status == 200) setData(res.data.products);
-      // console.log(res.data.products);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<{ message: string }>;
@@ -29,15 +39,36 @@ export const Store: React.FC = () => {
         );
         return;
       }
-      console.log(e);
+      console.error(e);
     } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
+    console.log("fetching");
     fetchData();
+    if (sort !== "relavance") {
+      setSort("relavance");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
+
+  useEffect(() => {
+    if (sort === "relavance") {
+      fetchData();
+    } else if (sort === "lt") {
+      setData((prev) => {
+        return [...prev].sort((a, b) => a.price - b.price);
+      });
+    } else if (sort === "gt") {
+      setData((prev) => {
+        return [...prev].sort((a, b) => b.price - a.price);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sort]);
+
   return (
     <div
       className="store-container"
@@ -58,7 +89,7 @@ export const Store: React.FC = () => {
           // height: 100,
         }}
       >
-        <Filters />
+        <Filters sort={sort} setSort={setSort} />
       </section>
       <section
         className="productCard-section"

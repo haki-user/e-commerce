@@ -2,3 +2,18 @@
   .filters-container {
   }
 } */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-start-center {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
