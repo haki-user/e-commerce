@@ -26,8 +26,8 @@ export const ProductCard: React.FC<{
         ...rest,
       }}
     >
-      <Link to={`/store/${_id}`}>
-        <div style={{ minHeight: "25vw" }}>
+      <Link to={`/store/${_id}`} style={{minWidth: "100%"}}>
+        <div style={{ minHeight: "25vw", minWidth: "100%"}}>
           <img
             src={img}
             alt="yede"
@@ -37,6 +37,7 @@ export const ProductCard: React.FC<{
               objectFit: "fill",
               minHeight: "80%",
               margin: 0,
+              maxHeight: "340px" 
             }}
           />
         </div>
