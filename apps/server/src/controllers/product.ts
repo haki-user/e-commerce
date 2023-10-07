@@ -74,10 +74,22 @@ export const getProductByIdController = async (req: Request, res: Response) => {
 };
 
 export const getBySearchController = async (req: Request, res: Response) => {
-  const { name, category } = req.query as { name?: string; category?: string };
-  const price = req.query.price
-    ? parseInt(req.query.price as string)
-    : undefined;
-  const products = await getBySearchQuery({ name, category, price });
+  const { name, categories, language } = req.query as {
+    name?: string;
+    categories?: string;
+    language?: string;
+    min?: number;
+    max?: number;
+  };
+  const min = req.query.min ? parseInt(req.query.min as string) : undefined;
+  const max = req.query.max ? parseInt(req.query.max as string) : undefined;
+
+  const products = await getBySearchQuery({
+    name: name,
+    categories,
+    language,
+    min,
+    max,
+  });
   res.json({ products });
 };

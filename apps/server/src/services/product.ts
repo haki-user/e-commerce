@@ -38,18 +38,29 @@ export const createProductData = async (
 
 export const getBySearchQuery = async ({
   name,
-  category,
-  price,
+  categories,
+  language,
+  min,
+  max,
 }: {
   name?: string;
-  category?: string;
-  price?: number;
+  categories?: string;
+  language?: string;
+  min?: number;
+  max?: number;
 }): Promise<IProduct[]> => {
   try {
     let query: any = {};
     if (name) query["name"] = { $regex: name, $options: "i" };
-    if (category) query["category"] = { $regex: category, $options: "i" };
-    if (price) query["price"] = { $lte: price };
+    if (categories) {
+      query["category"] = new RegExp(categories.split(",").join("|"), "i");
+    }
+    if (language) {
+      query["language"] = new RegExp(language.split(",").join("|"), "i");
+    }
+    if (min && max) query["price"] = { $lte: max, $gte: min };
+    else if (min) query["price"] = { $gte: min };
+    else if (max) query["price"] = { $lte: max };
 
     const products = await Product.find(query);
     return products;

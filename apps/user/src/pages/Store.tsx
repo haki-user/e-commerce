@@ -25,7 +25,7 @@ export const Store: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      // console.log(query);
+      console.log(query);
       const res = await axios.get("/products/search", {
         params: query,
       });
