@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { useRecoilState } from "recoil";
 // import { searchState } from "recoil-state";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { queryState } from "recoil-state";
 import { useSnackbar, SnackbarType } from "ui";
@@ -15,7 +15,7 @@ export const SearchBar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const setQuery = useSetRecoilState(queryState);
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   // console.log(location.pathname)
   const { showSnackbar } = useSnackbar();
   const inputRef = useRef<HTMLInputElement | null>(null);
