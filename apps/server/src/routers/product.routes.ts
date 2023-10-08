@@ -7,12 +7,14 @@ import {
   getAllProductsController,
   getProductByIdController,
   getBySearchController,
+  getSuggestionsByNameController,
 } from "../controllers/product";
 
 const router: Router = express.Router();
 
 router.get("/", getAllProductsController);
 router.get("/search", getBySearchController);
+router.get("/suggestions", getSuggestionsByNameController);
 router.get("/:id", getProductByIdController);
 router.post("/", authMiddleware, createProductController);
 router.put("/:id", authMiddleware, updateProductController);

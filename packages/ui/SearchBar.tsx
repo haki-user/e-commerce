@@ -1,17 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 // import { useRecoilState } from "recoil";
 // import { searchState } from "recoil-state";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { queryState } from "recoil-state";
+import { useSnackbar, SnackbarType } from "ui";
+import axios, { AxiosError } from "axios";
 import "./searchbar.css";
 
 export const SearchBar: React.FC = () => {
   //   const [search, setSearch] = useRecoilState(searchState);
   const [input, setInput] = useState("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const setQuery = useSetRecoilState(queryState);
   const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location.pathname)
+  const { showSnackbar } = useSnackbar();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -20,9 +26,46 @@ export const SearchBar: React.FC = () => {
       //   setSearch(input);
       setQuery((prev) => ({ ...prev, name: input }));
       // navigate(`/search${input ? `?q=${input}` : ""}`);
+      // if(location.pathname !== "/store") navigate("/store");
       navigate("/store");
     }
   };
+
+  const handleSuggestions = async () => {
+    try {
+      const response = await axios.get("/products/suggestions", {
+        params: {
+          q: input,
+        },
+      });
+      console.log(response.data.productNames);
+      setSuggestions(response.data.productNames);
+      console.log(suggestions);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<{ message: string }>;
+        showSnackbar(
+          SnackbarType.ERROR,
+          axiosError.response?.data.message || axiosError.message
+        );
+        return;
+      }
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    console.log("inp", input);
+    if (input === "") {
+      console.log("kkk");
+      setSuggestions([]);
+      return;
+    }
+    const timer = setTimeout(() => {
+      handleSuggestions();
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [input]);
 
   const hideSearchBar = () => {
     setIsExpanded(false);
@@ -53,7 +96,10 @@ export const SearchBar: React.FC = () => {
   }, [isExpanded]);
 
   return (
-    <div className={`searchbar ${isExpanded ? "expanded" : ""}`}>
+    <div
+      className={`searchbar ${isExpanded ? "expanded" : ""}`}
+      style={{ display: "flex", flexDirection: "column" }}
+    >
       {
         <div
           data-tooltip="Custom tooltip message"
@@ -99,6 +145,25 @@ export const SearchBar: React.FC = () => {
           </div>
         </div>
       }
+      {suggestions.length > 0 ? (
+        <div
+          className={`suggestions-container${isExpanded ? "-expanded" : ""}`}
+        >
+          {suggestions.map((suggestion) => (
+            <div
+              key={suggestion}
+              className="suggestion"
+              onMouseDown={() => {
+                // e.preventDefault();
+                setInput(suggestion);
+                setQuery((prev) => ({ ...prev, name: suggestion }));
+              }}
+            >
+              {suggestion}
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

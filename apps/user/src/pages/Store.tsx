@@ -26,9 +26,11 @@ export const Store: React.FC = () => {
   const fetchData = async () => {
     try {
       console.log(query);
+      setIsLoading(true);
       const res = await axios.get("/products/search", {
         params: query,
       });
+      console.log("fetched", res.data.products)
       if (res.status == 200) setData(res.data.products);
     } catch (e) {
       if (axios.isAxiosError(e)) {

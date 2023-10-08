@@ -7,6 +7,7 @@ import {
   getAllProducts,
   getProductById,
   getBySearchQuery,
+  getSuggestionsByName,
 } from "../services/product";
 
 export const createProductController = async (req: Request, res: Response) => {
@@ -92,4 +93,14 @@ export const getBySearchController = async (req: Request, res: Response) => {
     max,
   });
   res.json({ products });
+};
+
+export const getSuggestionsByNameController = async (
+  req: Request,
+  res: Response
+) => {
+  const { q } = req.query as { q: string };
+  console.log(q);
+  const productNames = await getSuggestionsByName(q);
+  res.json({ productNames });
 };

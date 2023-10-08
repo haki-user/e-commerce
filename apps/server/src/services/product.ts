@@ -51,7 +51,10 @@ export const getBySearchQuery = async ({
 }): Promise<IProduct[]> => {
   try {
     let query: any = {};
-    if (name) query["name"] = { $regex: name, $options: "i" };
+    if (name) {
+      const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query["name"] = { $regex: escapedName, $options: "i" };
+    }
     if (categories) {
       query["category"] = new RegExp(categories.split(",").join("|"), "i");
     }
@@ -61,11 +64,49 @@ export const getBySearchQuery = async ({
     if (min && max) query["price"] = { $lte: max, $gte: min };
     else if (min) query["price"] = { $gte: min };
     else if (max) query["price"] = { $lte: max };
-
     const products = await Product.find(query);
     return products;
   } catch (error) {
     console.error(error);
+    return [];
+  }
+};
+
+export const getSuggestionsByName = async (query: string): Promise<string[]> => {
+  try {
+    const result = await Product.aggregate([
+      {
+        $match: {
+          name: {
+            $regex: query,
+            $options: "i",
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          name: 1,
+          // score: {
+          //   $indexOfCP: ["$name", query],
+          // },
+        },
+      },
+      {
+        $sort: {
+          score: 1,
+        },
+      },
+    ]);
+    // console.log(query, suggestions);
+    // console.log("ers", result)
+    const withScore = result.map((item) => {return {name: item.name, score: item.name.indexOf(query)}});
+    // console.log("lo",withScore)
+    const suggestions = withScore.sort((a, b) => a.score - b.score).map((product) => product.name);
+    // console.log("sug", suggestions)
+    return suggestions.splice(0, 5);
+  } catch (e) {
+    console.error(e);
     return [];
   }
 };

@@ -41,7 +41,7 @@ export const Filters: React.FC<{
           max: maxSelect.toString(),
         };
       });
-    }, 200);
+    }, 1000);
     return () => clearTimeout(updateQueryTimer);
   }, [minSelect, maxSelect, setQuery]);
 
