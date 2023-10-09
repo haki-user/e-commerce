@@ -21,13 +21,13 @@ export const SearchBar: React.FC = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.key);
     if (e.key === "Enter") {
       //   setSearch(input);
       setQuery((prev) => ({ ...prev, name: input }));
       // navigate(`/search${input ? `?q=${input}` : ""}`);
       // if(location.pathname !== "/store") navigate("/store");
       navigate("/store");
+      hideSearchBar();
     }
   };
 
@@ -38,9 +38,8 @@ export const SearchBar: React.FC = () => {
           q: input,
         },
       });
-      console.log(response.data.productNames);
+      console.log("suggestions fetched");
       setSuggestions(response.data.productNames);
-      console.log(suggestions);
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<{ message: string }>;
@@ -55,13 +54,12 @@ export const SearchBar: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("inp", input);
     if (input === "") {
-      console.log("kkk");
       setSuggestions([]);
       return;
     }
     const timer = setTimeout(() => {
+      console.log("fetching suggestions");
       handleSuggestions();
     }, 200);
     return () => clearTimeout(timer);
@@ -79,9 +77,7 @@ export const SearchBar: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("yes");
     const handleCtrShiftF = (e: KeyboardEvent) => {
-      console.log("yo");
       if (e.ctrlKey && e.shiftKey && (e.key === "f" || e.key === "F")) {
         if (inputRef.current) {
           if (!isExpanded) setIsExpanded(true);
@@ -151,15 +147,26 @@ export const SearchBar: React.FC = () => {
         >
           {suggestions.map((suggestion) => (
             <div
+              className="suggestion-outer"
               key={suggestion}
-              className="suggestion"
               onMouseDown={() => {
                 // e.preventDefault();
                 setInput(suggestion);
                 setQuery((prev) => ({ ...prev, name: suggestion }));
+                navigate("/store")
+              }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
               }}
             >
-              {suggestion}
+              <div
+                className="suggestion-blue"
+                style={{ width: 6, height: 31 }}
+              ></div>
+              <div className="suggestion">{suggestion}</div>
             </div>
           ))}
         </div>

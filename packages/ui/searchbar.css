@@ -124,9 +124,11 @@
   z-index: 10000000000;
   background-color: white;
   border: 1px solid #ddd;
+  border-left: none;
   border-radius: 10px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  padding: 4px 0;
 }
 
 .suggestions-container {
@@ -149,6 +151,7 @@
   font-family: 'Open Sans';
   color: #222;
   background-color: white;
+  width: 100%;
   max-width: 300px;
   max-height: 20px;
   /* display: flex; */
@@ -161,4 +164,8 @@
 
 .suggestion:hover {
   background-color: #eee;
+}
+
+.suggestion-outer:hover  .suggestion-blue {
+  background-color: black;
 }
