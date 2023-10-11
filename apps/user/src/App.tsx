@@ -12,7 +12,7 @@ import { Snackbar, SnackbarType } from "ui/Snackbar";
 import { useSnackbar } from "ui";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://16.171.93.79/api/";
+axios.defaults.baseURL = " http://16.171.93.79/api/";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
