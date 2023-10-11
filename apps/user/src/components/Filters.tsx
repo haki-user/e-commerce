@@ -21,19 +21,19 @@ export const Filters: React.FC<{
   const setQuery = useSetRecoilState(queryState);
 
   useEffect(() => {
-    setQuery((prev) => {
-      return {
-        ...prev,
-        language: language?.join(",") || "",
-        categories: categories?.join(",") || "",
-      };
-    });
-  }, [language, categories, setQuery]);
+      setQuery((prev) => {
+        return {
+          ...prev,
+          language: language?.join(",") || "",
+          categories: categories?.join(",") || "",
+        };
+      });
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language, categories]);
 
   useEffect(() => {
-    // console.log("updating");
     const updateQueryTimer = setTimeout(() => {
-      // console.log("updated");
       setQuery((prev) => {
         return {
           ...prev,
@@ -43,7 +43,8 @@ export const Filters: React.FC<{
       });
     }, 1000);
     return () => clearTimeout(updateQueryTimer);
-  }, [minSelect, maxSelect, setQuery]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [minSelect, maxSelect]);
 
   if (minSelect > maxSelect) {
     const tmp = minSelect;

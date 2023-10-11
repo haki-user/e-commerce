@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, CancelTokenSource } from "axios";
 import { useRecoilValue } from "recoil";
 import { queryState } from "recoil-state";
 import { ProductCard, SnackbarType, useSnackbar } from "ui";
@@ -14,6 +14,8 @@ type Product = {
   img: string;
 };
 
+let source: CancelTokenSource;
+
 type sortType = "lt" | "gt" | "relavance";
 
 export const Store: React.FC = () => {
@@ -25,15 +27,23 @@ export const Store: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      console.log(query);
+      console.log("fetching");
+      if (source) source.cancel();
+      source = axios.CancelToken.source();
+      console.log(query, sort);
       setIsLoading(true);
       const res = await axios.get("/products/search", {
         params: query,
+        cancelToken: source.token,
       });
-      console.log("fetched", res.data.products)
+
+      console.log("fetched", res.data.products);
       if (res.status == 200) setData(res.data.products);
     } catch (e) {
-      if (axios.isAxiosError(e)) {
+      
+      if (axios.isCancel(e)) {
+        console.log("Request canceled", e.message);
+      } else if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<{ message: string }>;
         showSnackbar(
           SnackbarType.ERROR,
@@ -48,17 +58,25 @@ export const Store: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("fetching");
-    fetchData();
     if (sort !== "relavance") {
       setSort("relavance");
+      return;
     }
+    fetchData();
+
+    return () => {
+      if (source) source.cancel();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => {
     if (sort === "relavance") {
       fetchData();
+
+      return () => {
+        if (source) source.cancel();
+      };
     } else if (sort === "lt") {
       setData((prev) => {
         return [...prev].sort((a, b) => a.price - b.price);

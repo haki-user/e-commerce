@@ -152,6 +152,7 @@ export const SearchBar: React.FC = () => {
               onMouseDown={() => {
                 // e.preventDefault();
                 setInput(suggestion);
+                console.log("suggestion clicked");
                 setQuery((prev) => ({ ...prev, name: suggestion }));
                 navigate("/store")
               }}
