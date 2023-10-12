@@ -13,19 +13,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up SSH key
+    - name: Set up SSH key and known hosts
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        ssh-keyscan ec2-16-171-93-79.eu-north-1.compute.amazonaws.com >> ~/.ssh/known_hosts
 
-    - name: SSH into EC2
+    - name: SSH into EC2 and deploy
       run: |
-        ssh -i ~/.ssh/id_rsa ubuntu@ec2-16-171-93-79.eu-north-1.compute.amazonaws.com
-
-    - name: Run build.sh script
-      run: ./build.sh
+        ssh -i ~/.ssh/id_rsa ubuntu@ec2-16-171-93-79.eu-north-1.compute.amazonaws.com "cd /path/to/your/app && ./build.sh"
 
     - name: Notify on failure
       if: failure()
