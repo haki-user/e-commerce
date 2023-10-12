@@ -22,7 +22,7 @@ jobs:
 
     - name: SSH into EC2 and deploy
       run: |
-        ssh -i ~/.ssh/id_rsa ubuntu@ec2-16-171-93-79.eu-north-1.compute.amazonaws.com "sudo ./build.sh"
+        ssh -i ~/.ssh/id_rsa ubuntu@ec2-16-171-93-79.eu-north-1.compute.amazonaws.com "./build.sh"
 
     - name: Notify on failure
       if: failure()
