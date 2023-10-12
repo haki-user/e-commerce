@@ -14,11 +14,17 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-    - name: Run your build.sh script
+    - name: SSH into EC2
+      run: |
+        ssh -i ~/.ssh/id_rsa ubuntu@ec2-16-171-93-79.eu-north-1.compute.amazonaws.com
+
+    - name: Run build.sh script
       run: ./build.sh
 
     - name: Notify on failure
