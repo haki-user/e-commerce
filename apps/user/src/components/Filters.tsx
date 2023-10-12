@@ -18,9 +18,11 @@ export const Filters: React.FC<{
   const [maxSelect, setMaxSelect] = useState(MAX);
   const [language, setLanguage] = useState<string[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [isReady, setIsReady] = useState(false);
   const setQuery = useSetRecoilState(queryState);
 
   useEffect(() => {
+    if(!isReady) return;
       setQuery((prev) => {
         return {
           ...prev,
@@ -33,6 +35,7 @@ export const Filters: React.FC<{
   }, [language, categories]);
 
   useEffect(() => {
+    if(!isReady) return;
     const updateQueryTimer = setTimeout(() => {
       setQuery((prev) => {
         return {
@@ -109,6 +112,7 @@ export const Filters: React.FC<{
                 onChange={({ min, max }: { min: number; max: number }) => {
                   setMinSelect(min);
                   setMaxSelect(max);
+                  setIsReady(true);
                 }}
               />
             </div>
@@ -123,6 +127,7 @@ export const Filters: React.FC<{
                   <InputOption
                     text="English"
                     callBack={() => {
+                      setIsReady(true);
                       if (language.includes("English")) {
                         setLanguage((prev) =>
                           prev.filter((e) => e !== "English")
@@ -135,6 +140,7 @@ export const Filters: React.FC<{
                   <InputOption
                     text="Japanese"
                     callBack={() => {
+                      setIsReady(true);
                       if (language.includes("Japanese")) {
                         setLanguage((prev) =>
                           prev.filter((e) => e !== "Japanese")
@@ -156,6 +162,7 @@ export const Filters: React.FC<{
                   <InputOption
                     text="Manga"
                     callBack={() => {
+                      setIsReady(true);
                       if (categories.includes("Manga")) {
                         setCategories((prev) =>
                           prev.filter((e) => e !== "Manga")
@@ -168,6 +175,7 @@ export const Filters: React.FC<{
                   <InputOption
                     text="Comics"
                     callBack={() => {
+                      setIsReady(true);
                       if (categories.includes("Comics")) {
                         setCategories((prev) =>
                           prev.filter((e) => e !== "Comics")

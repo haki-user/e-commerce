@@ -76,10 +76,11 @@ const App: React.FC = () => {
       <Snackbar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="store" element={<Store />} />
+        <Route path="store/" element={<Store />} />
+        <Route path="store/:name" element={<Store />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="store/:id" element={<ProductPage />} />
+        <Route path="store/product/:id" element={<ProductPage />} />
       </Routes>
     </Router>
   );

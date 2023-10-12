@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios, { AxiosError, CancelTokenSource } from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { queryState } from "recoil-state";
 import { ProductCard, SnackbarType, useSnackbar } from "ui";
 import { Filters } from "../components/Filters";
@@ -22,8 +23,9 @@ export const Store: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Product[]>([]);
   const { showSnackbar } = useSnackbar();
-  const query = useRecoilValue(queryState);
+  const [query, setQuery] = useRecoilState(queryState);
   const [sort, setSort] = useState<sortType>("relavance");
+  const search = useParams();
 
   const fetchData = async () => {
     try {
@@ -39,25 +41,36 @@ export const Store: React.FC = () => {
 
       console.log("fetched", res.data.products);
       if (res.status == 200) setData(res.data.products);
+      setIsLoading(false);
     } catch (e) {
-      
       if (axios.isCancel(e)) {
         console.log("Request canceled", e.message);
+        return;
       } else if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<{ message: string }>;
         showSnackbar(
           SnackbarType.ERROR,
           axiosError.response?.data.message || axiosError.message
         );
+        setIsLoading(false);
         return;
       }
       console.error(e);
-    } finally {
-      setIsLoading(false);
     }
+    // finally {
+    //   console.log("set false");
+    //   setIsLoading(false);
+    // }
   };
 
   useEffect(() => {
+    if (search && search.name !== query.name) {
+      setQuery((prev) => ({
+        ...prev,
+        name: search.name as string,
+      }));
+      return;
+    }
     if (sort !== "relavance") {
       setSort("relavance");
       return;
@@ -68,7 +81,7 @@ export const Store: React.FC = () => {
       if (source) source.cancel();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [query, search]);
 
   useEffect(() => {
     if (sort === "relavance") {
@@ -142,7 +155,22 @@ export const Store: React.FC = () => {
           rest={{ width: "100px" }}
         /> */}
 
-        {isLoading ? (
+        {!isLoading && data.length === 0 ? (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#FCFEFC",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center ",
+              textAlign: "center",
+            }}
+          >
+            Nothing to show <br />
+            Try Searching One Piece
+          </div>
+        ) : isLoading || data.length === 0 ? (
           <div
             style={{
               width: "100%",

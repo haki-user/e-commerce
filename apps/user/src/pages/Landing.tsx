@@ -56,7 +56,7 @@ export const Landing: React.FC = () => {
         }}
       >
         <Link
-          to="/store/64d3dc4f3513fc7427ea5c79"
+          to="/store/product/64d3dc4f3513fc7427ea5c79"
           style={{ gridColumn: "1/13", height: "31vw", position: "relative" }}
         >
           <Card
