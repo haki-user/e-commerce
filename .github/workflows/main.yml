@@ -1,0 +1,27 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - aws-saved
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.5
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Run your build.sh script
+      run: ./build.sh
+
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "Deployment failed. Please check the workflow logs for details." | mail -s "Deployment Failed" adityapratapsingh.aps333@gmail.com
