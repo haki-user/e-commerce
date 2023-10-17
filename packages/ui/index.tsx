@@ -1,5 +1,5 @@
 // component exports
-export * from "./AnimeCard";
+export * from "./WideCard";
 export * from "./Card";
 export * from "./ProductCard";
 export * from "./LoginCard";

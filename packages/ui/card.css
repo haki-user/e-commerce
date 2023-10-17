@@ -8,19 +8,26 @@
 }} */
 
 .card-text {
-  width: 100%;
   position: absolute;
-  bottom: 0;
+  top: 5%;
+  left: 5%;
   color: black;
   box-sizing: border-box;
-  background-image: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0)
-  );
+}
+
+.card-text-dark {
+  width: 100%;
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  color: white;
+  box-sizing: border-box;
 }
 
 .text {
   color: red;
 }
 
+.dark-card-img {
+    filter: brightness(0.4);
+}

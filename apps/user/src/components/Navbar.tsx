@@ -18,6 +18,8 @@ export const Navbar: React.FC = () => {
     <nav
       className="navbar"
       style={{
+        position: "sticky",
+        top: 0,
         height: 48,
         paddingLeft: 16,
         paddingRight: 16,
@@ -25,6 +27,7 @@ export const Navbar: React.FC = () => {
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "#f7f7f7",
+        zIndex: 1000,
       }}
     >
       <div className="navAppLogo" style={{ maxWidth: 32, maxHeight: 32 }}>
