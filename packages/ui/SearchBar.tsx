@@ -26,7 +26,7 @@ export const SearchBar: React.FC = () => {
       setQuery((prev) => ({ ...prev, name: input }));
       // navigate(`/search${input ? `?q=${input}` : ""}`);
       // if(location.pathname !== "/store") navigate("/store");
-      navigate("/store");
+      navigate(`/store/${input}`);
       hideSearchBar();
     }
   };
@@ -154,7 +154,8 @@ export const SearchBar: React.FC = () => {
                 setInput(suggestion);
                 console.log("suggestion clicked");
                 setQuery((prev) => ({ ...prev, name: suggestion }));
-                navigate("/store")
+                navigate(`/store/${suggestion}`);
+
               }}
               style={{
                 display: "flex",

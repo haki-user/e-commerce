@@ -26,7 +26,7 @@ export const ProductCard: React.FC<{
         ...rest,
       }}
     >
-      <Link to={`/store/${_id}`} style={{minWidth: "100%"}}>
+      <Link to={`/store/product/${_id}`} style={{minWidth: "100%"}}>
         <div style={{ minHeight: "25vw", minWidth: "100%"}}>
           <img
             src={img}
@@ -43,7 +43,7 @@ export const ProductCard: React.FC<{
         </div>
       </Link>
       <Link
-        to={`/store/${_id}`}
+        to={`/store/product${_id}`}
         className="productCard-title"
         style={{
           width: "100%",
@@ -59,7 +59,7 @@ export const ProductCard: React.FC<{
       >
         {description}
       </p>
-      <Link to={`/store/${_id}`} className="productCard-price">
+      <Link to={`/store/product${_id}`} className="productCard-price">
         ₹{price}
       </Link>
     </div>
