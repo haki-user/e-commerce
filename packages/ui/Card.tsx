@@ -37,7 +37,7 @@ export const Card: React.FC<{
           objectFit: "fill",
         }}
       />
-      <div className={`card-text${dark ? "-dark" : ""}`}>
+      <div className={`card-text${dark ? "-dark" : ""} ${textClass}`}>
         <h1 className="card-title" style={{}}>
           {title}
         </h1>

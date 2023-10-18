@@ -32,6 +32,7 @@ export const WideCard: React.FC<{
       style={{
         gridTemplate: "33vw / repeat(12, 1fr)",
         marginBottom: "1.22222vw",
+        ...rest
       }}
     >
       <Link
