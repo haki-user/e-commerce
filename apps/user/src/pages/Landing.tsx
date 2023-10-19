@@ -94,11 +94,11 @@ export const Landing: React.FC = () => {
           rest={{ gridColumn: "10/13" }}
         />
       </section>
-      <footer className="landing-footer">
+      <footer className="landing-footer" style={{ position: "relative", bottom: 0}}>
         <p style={{ color: "white" }}>
           About{" "}
           <span>
-            <img src="https://w7.pngwing.com/pngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png" />
+            {/* <img src="https://w7.pngwing.com/p  ngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png" /> */}
             <a href="https://github.com/haki-user/e-commerce" target="_blank" rel="noopener noreferrer">Github</a>
           </span>
         </p>
