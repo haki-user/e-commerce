@@ -1,33 +1,21 @@
-import mongoose, { Document, Schema, Types } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IProductData extends Document {
-  name: Types.ObjectId;
-  price: Types.ObjectId;
-  img: Types.ObjectId;
+  name: string;
   description: string;
-  specs?: string[];
+  price: number;
+  img: string;
   images?: string[];
+  specs?: string[];
   category?: string;
 }
 
 const productDataSchema = new Schema<IProductData>({
-  name: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "products",
-    required: true,
-  },
-  price: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "products",
-    required: true,
-  },
-  img: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "products",
-    required: true,
-  },
-  description: { type: String, required: false },
+  name: { type: String, required: true },
+  description: { type: String, requried: true },
   specs: { type: [String], required: false },
+  price: { type: Number, required: true },
+  img: { type: String, required: true },
   images: { type: [String], required: false },
   category: { type: String, required: false },
 });
