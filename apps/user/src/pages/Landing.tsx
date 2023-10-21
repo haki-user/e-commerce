@@ -13,8 +13,8 @@ export const Landing: React.FC = () => {
     // stop overflow on landing page card container div have right padding 10px
     <div
       style={{
-        height: "100%",
-        width: "100%",
+        // height: "100%",
+        // width: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -96,7 +96,7 @@ export const Landing: React.FC = () => {
           rest={{ gridColumn: "10/13" }}
         />
       </section>
-      <footer className="landing-footer" style={{ position: "absolute", bottom: 0, marginTop: "auto"}}>
+      <footer className="landing-footer" style={{ position: "relative", bottom: 0, marginTop: "auto"}}>
         <p style={{ color: "white" }}>
           About{" "}
           <span>
