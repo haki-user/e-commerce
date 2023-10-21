@@ -30,7 +30,7 @@ export const ProductCard: React.FC<{
         <div style={{ minHeight: "25vw", minWidth: "100%"}}>
           <img
             src={img}
-            alt="yede"
+            alt=""
             style={{
               width: "100%",
               height: "100%",

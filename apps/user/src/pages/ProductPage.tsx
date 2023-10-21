@@ -129,7 +129,7 @@ export const ProductPage: React.FC = () => {
           >
             <img
               src={product.img}
-              alt="yede"
+              alt=""
               style={{
                 width: "277px",
                 height: "416px",
