@@ -1,4 +1,5 @@
 Live: http://store.port0.org
+server is down, some aws issue
 - deployed on aws
 - Typescript
 - MERN
